@@ -3,8 +3,6 @@
 #include "forth.h"
 #include <string.h>
 
-// Remove the redundant struct definition from forth.c
-
 static void push(ForthEnv* env, int value) {
     if(env->stackPointer < STACK_SIZE) {
         env->stack[env->stackPointer++] = value;
@@ -23,13 +21,26 @@ static int pop (ForthEnv* env) {
 }
 
 ForthEnv* forth_create_env() {
+    printf("Creating Forth environment...\n");
     ForthEnv* env = (ForthEnv*)malloc(sizeof(ForthEnv));
     if (env == NULL) {
         fprintf(stderr, "Failed to allocate memory for Forth environment\n");
         exit(EXIT_FAILURE);
     }
+    printf("Memory allocated for Forth environment\n");
+
+    // Initialize stack pointer
     env->stackPointer = 0;
-    env->dictSize = 0; // Initialize dictionary size
+    // Initialize dictionary size
+    env->dictSize = 0;
+
+    printf("Forth environment created successfully\n");
+
+    printf("Stack size: %d\n", STACK_SIZE);
+    printf("Dictionary size: %d\n", DICTIONARY_SIZE);
+    printf("Stack pointer: %d\n", env->stackPointer);
+    printf("Dictionary size: %d\n", env->dictSize);
+
     return env;
 }
 
