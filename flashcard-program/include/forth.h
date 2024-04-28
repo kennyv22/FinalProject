@@ -5,15 +5,13 @@
 #define MAX_WORD_LENGTH 32
 #define DICTIONARY_SIZE 60
 
-typedef struct {
-    char name[MAX_WORD_LENGTH];
-    void (*function)(struct ForthEnv* env);
-} ForthWord;
-
-typedef struct {
+typedef struct ForthEnv {
     int stack[STACK_SIZE];
     int stackPointer;
-    ForthWord dictionary[DICTIONARY_SIZE];
+    struct ForthWord {
+        char name[MAX_WORD_LENGTH];
+        void (*function)(struct ForthEnv* env);
+    } dictionary[DICTIONARY_SIZE];
     int dictSize;
 } ForthEnv;
 
